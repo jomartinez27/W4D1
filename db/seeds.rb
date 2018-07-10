@@ -9,10 +9,22 @@
 ActiveRecord::Base.transaction do
   User.destroy_all
 
+
   # Wizards
-  jose = User.new(name: 'Jose', email: 'jose@jose.com')
-  jose1 = User.new(name: 'Jose1', email: 'jose1@jose.com')
-  jose2 = User.new(name: 'Jose2', email: 'jose2@jose.com')
-  jose3 = User.new(name: 'Jose3', email: 'jose3@jose.com')
-  jose4 = User.new(name: 'Jose4', email: 'jose4@jose.com')
+  jose = User.create!(username: 'Jose')
+  jose1 = User.create!(username: 'Jose1')
+  jose2 = User.create!(username: 'Jose2')
+  jose3 = User.create!(username: 'Jose3')
+  jose4 = User.create!(username: 'Jose4')
+  
+  ArtWork.destroy_all
+  art1 = ArtWork.create!(title: 'monalisa', artist_id: jose.id, image_url: 'https://bit.ly/2KTZ4g3')
+  art2 = ArtWork.create!(title: 'monalisa1', artist_id: jose2.id, image_url: 'https://bit.ly/2KTZN0L')
+  art3 = ArtWork.create!(title: 'monalisa2', artist_id: jose3.id, image_url: 'https://bit.ly/2KZsUjp')
+  art4 = ArtWork.create!(title: 'monalisa3', artist_id: jose.id, image_url: 'https://bit.ly/2zqafIN')
+  
+  ArtworkShare.destroy_all
+  share1 = ArtworkShare.create!(artwork_id: art1.id, viewer_id: jose3.id)
+  share2 = ArtworkShare.create!(artwork_id: art4.id, viewer_id: jose1.id)
+  share3 = ArtworkShare.create!(artwork_id: art4.id, viewer_id: jose2.id)
 end
